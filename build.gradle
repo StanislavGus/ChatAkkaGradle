@@ -1,0 +1,41 @@
+plugins {
+    id 'scala'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+//sourceSets {
+//    main {
+//        scala {
+//            srcDirs = ['src/main/scala']
+//        }
+//    }
+//    test {
+//        scala {
+//            srcDirs = ['test/main/scala']
+//        }
+//    }
+//}
+
+def versions = [
+        ScalaBinary: "2.13"
+]
+dependencies {
+    implementation "org.scala-lang:scala-library:2.13.5"
+    implementation platform("com.typesafe.akka:akka-bom_${versions.ScalaBinary}:2.6.15")
+    implementation "com.typesafe.akka:akka-cluster-typed_${versions.ScalaBinary}"
+    implementation "com.typesafe.akka:akka-serialization-jackson_${versions.ScalaBinary}"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'dev.pavel.App'
+    }
+}
+
+application {
+    mainClass = 'dev.pavel.App'
+}
